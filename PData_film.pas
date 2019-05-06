@@ -13,6 +13,12 @@ type
     prev,next:PData;
   end;
 
+procedure penciptaan(var awal,akhir:PData);
+  begin
+      awal:=nil;
+      akhir:=nil;
+  end;
+
 begin
   writeln('hello wolrd');
   writeln('Coba 123');
