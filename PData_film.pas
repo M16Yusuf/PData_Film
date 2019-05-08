@@ -16,10 +16,10 @@ type
     prev,next:PData;
   end;
 
-  var 
-    banyakdata : integer;
-    piihan_menu : integer;
-    awal,akhir : PData;
+var 
+  banyakdata : integer;
+  piihan_menu : integer;
+  awal,akhir : PData;
 
 procedure penciptaan(var awal,akhir:PData);
   begin
@@ -30,7 +30,7 @@ procedure penciptaan(var awal,akhir:PData);
 
 procedure simpanfile();
 var 
-  f : file of TData;
+  f : file of PData;
   i : integer;
 begin
   assign (f,namafile);
