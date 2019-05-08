@@ -12,7 +12,6 @@ type
     genre : string[7];
     Tahun : integer[4];
     rating : real;
-    info : integer;
     prev,next:PData;
   end;
 
