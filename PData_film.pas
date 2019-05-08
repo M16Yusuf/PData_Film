@@ -22,4 +22,4 @@ procedure penciptaan(var awal,akhir:PData);
 begin
   writeln('hello wolrd');
   writeln('Coba 123');
-end.//yusup
+end.ngentot
