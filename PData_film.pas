@@ -15,7 +15,8 @@ type
     prev,next:PData;
   end;
 
-var 
+var
+  filem : array[1..maks] of TData;
   banyakdata : integer;
   piihan_menu : integer;
   awal,akhir : PData;
@@ -40,28 +41,44 @@ end;
 procedure tambah_filem_sisipdepan(var awal,akhir:PData); //Menambahkan Filem // Alif.R.K
 var 
   baru:PData;
-begin
-  new(baru);
-  baru^.Judul:=data;
-  baru^.Sutradara:=data;
-  baru^.genre:data;
-  baru^.Tahun:=data;
-  baru^.rating:=data:
-  baru^.prev:=nil;
-  baru^.next:=nil;
-  if awal=nil then 
-  begin
-    awal:=baru;
-    akhir:=baru;
+  begin  
+    clrscr;
+    if banyakdata<maks then
+      begin
+        banyakdata:=banyakdata+1;
+        writeln('Data filem masuk ke-',banyakdata);
+        writeln('Judul filem :');readln(filem[banyakdata].judul_filem);
+        writeln('Sutradara   :');readln(filem[banyakdata].sutradara);
+        writeln('genre  :');readln(filem[banyakdata].genre);
+        writeln('Tahun  :');readln(filem[banyakdata].tahun);
+        writeln('taring :');readln(filem[banyakdata].rating);
+      end
+    else
+    begin
+      writeln('batas data sudah mencapai batas masksimum');
+    end;
+    begin
+      new(baru);
+      baru^.Judul:=data;
+      baru^.Sutradara:=data;
+      baru^.genre:data;
+      baru^.Tahun:=data;
+      baru^.rating:=data:
+      baru^.prev:=nil;
+      baru^.next:=nil;
+      if awal=nil then 
+      begin
+        awal:=baru;
+        akhir:=baru;
+      end;
+      else
+      begin
+        baru^.next:=awal;
+        awal^.prev:=baru;
+        awal:=baru;
+      end;
+    end;
   end;
-  else
-  begin
-    baru^.next:=awal;
-    awal^.prev:=baru;
-    awal:=baru;
-  end;
-end;
-
 
 // Alif
 function menu :integer;
