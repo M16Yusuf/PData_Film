@@ -57,3 +57,23 @@ begin
     writeln('6. Tampil Filem dari Load');
     writeln('') 
 end;
+
+begin
+    banyakdata:=0;
+    bacaFile();
+    repeat
+        clrscr;
+        piihan_menu := menu();
+        case piihan_menu of 
+          1 : tambah_filem;
+          2 : edit_filem;
+          3 : hapus_filem;
+          4 : urut_filem;
+          5 : cari_filem;
+          6 : tambah_filem;
+          0 :;
+          else writeln('pilihan tidak dikenal');
+        end;
+    until piihan_menu =0;
+    simpanFile();
+end.
