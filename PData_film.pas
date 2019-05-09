@@ -37,7 +37,7 @@ begin
       write(f,PData);
 end;
 
-procedure tambah_filem_sisipdepan; //Menambahkan Filem // Alif.R.K
+procedure tambah_filem_sisipdepan(var awal,akhir:PData); //Menambahkan Filem // Alif.R.K
 var 
   baru:PData;
 begin
