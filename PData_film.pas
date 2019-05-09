@@ -81,6 +81,49 @@ var
     end;
   end;
 
+  procedure tambah_filem_sisipbelakang(var awal,akhir:PData;data:integer); //Menambahkan Filem // Alif.R.K
+var 
+  baru:PData;
+  begin  
+    clrscr;
+    if banyakdata<maks then
+      begin
+        banyakdata:=banyakdata+1;
+        writeln('Data filem masuk ke-',banyakdata);
+        writeln('Judul filem :');readln(filem[banyakdata].judul_filem);
+        writeln('Sutradara   :');readln(filem[banyakdata].sutradara);
+        writeln('genre  :');readln(filem[banyakdata].genre);
+        writeln('Tahun  :');readln(filem[banyakdata].tahun);
+        writeln('taring :');readln(filem[banyakdata].rating);
+      end
+    else
+    begin
+      writeln('batas data sudah mencapai batas masksimum');
+    end;
+
+    begin
+      new(baru);
+        baru^.Judul:=data;
+         baru^.Sutradara:=data;
+         baru^.genre:data;
+         baru^.Tahun:=data;
+         baru^.rating:=data:
+         baru^.prev:=nil;
+         baru^.next:=nil;
+      if awal=nil then 
+      begin
+        awal:=baru;
+        akhir:=baru;
+      end;
+      else
+      begin
+        baru^.prev:=akhir;
+          akhir^.next:=baru;
+          akhir:=baru;
+      end;
+    end;
+  end;
+
 // Alif.R.K
 function menu :integer;
   var pil:integer;
