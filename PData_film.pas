@@ -37,6 +37,32 @@ begin
       write(f,PData);
 end;
 
+procedure tambah_filem_sisipdepan; //Menambahkan Filem // Alif.R.K
+var 
+  baru:PData;
+begin
+  new(baru);
+  baru^.Judul:=data;
+  baru^.Sutradara:=data;
+  baru^.genre:data;
+  baru^.Tahun:=data;
+  baru^.rating:=data:
+  baru^.prev:=nil;
+  baru^.next:=nil;
+  if awal=nil then 
+  begin
+    awal:=baru;
+    akhir:=baru;
+  end;
+  else
+  begin
+    baru^.next:=awal;
+    awal^.prev:=baru;
+    awal:=baru;
+  end;
+end;
+
+
 // Alif
 function menu :integer;
   var pil:integer;
@@ -65,7 +91,7 @@ begin
         clrscr;
         piihan_menu := menu();
         case piihan_menu of 
-          1 : tambah_filem;
+          1 : tambah_filem_sisipdepan;
           2 : edit_filem;
           3 : hapus_filem;
           4 : urut_filem;
