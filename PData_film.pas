@@ -1,17 +1,24 @@
 program Pdata_film;
-uses crt;
+uses crt, sysutils;
+
+const 
+  namafile = 'DataFilm.dat';
 
 type 
   PData = ^TData; 
   TData = record
-       Judul : String[15];
-       Sutradara : String[10];
-       genre : string[7];
-       Tahun : integer[4];
-       rating : real;
-       info : integer;
-       prev,next:PData;
+    Judul : String[15];
+    Sutradara : String[10];
+    genre : string[7];
+    Tahun : integer[4];
+    rating : real;
+    prev,next:PData;
   end;
+
+var 
+  banyakdata : integer;
+  piihan_menu : integer;
+  awal,akhir : PData;
 
 procedure penciptaan(var awal,akhir:PData);
   begin
@@ -19,12 +26,18 @@ procedure penciptaan(var awal,akhir:PData);
       akhir:=nil;
   end;
 
+procedure simpanfile();
+var 
+  f : file of PData;
+  i : integer;
 begin
-  writeln('hello wolrd');
-  writeln('Coba 123');
-end.
+  assign (f,namafile);
+  rewrite(f);
+  for i:=1 to banyakdata do 
+      write(f,PData);
+end;
 
-
+// Alif
 function menu :integer;
   var pil:integer;
 begin
