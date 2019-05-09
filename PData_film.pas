@@ -81,7 +81,7 @@ var
     end;
   end;
 
-  procedure tambah_filem_sisipbelakang(var awal,akhir:PData;data:integer); //Menambahkan Filem // Alif.R.K
+procedure tambah_filem_sisipbelakang(var awal,akhir:PData;data:integer); //Menambahkan Filem // Alif.R.K
 var 
   baru:PData;
   begin  
