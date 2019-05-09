@@ -54,5 +54,6 @@ begin
     writeln('3. Hapus Filem');
     writeln('4. Urutkan Filem');
     writeln('5. Cari Filem');
+    writeln('6. Tampil Filem dari Load');
     writeln('') 
 end;
