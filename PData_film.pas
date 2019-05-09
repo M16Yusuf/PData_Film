@@ -81,7 +81,7 @@ var
     end;
   end;
 
-// Alif
+// Alif.R.K
 function menu :integer;
   var pil:integer;
 begin
