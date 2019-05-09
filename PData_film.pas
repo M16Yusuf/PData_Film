@@ -57,15 +57,16 @@ var
     begin
       writeln('batas data sudah mencapai batas masksimum');
     end;
+
     begin
       new(baru);
-      baru^.Judul:=data;
-      baru^.Sutradara:=data;
-      baru^.genre:data;
-      baru^.Tahun:=data;
-      baru^.rating:=data:
-      baru^.prev:=nil;
-      baru^.next:=nil;
+        baru^.Judul:=data;
+         baru^.Sutradara:=data;
+         baru^.genre:data;
+         baru^.Tahun:=data;
+         baru^.rating:=data:
+         baru^.prev:=nil;
+         baru^.next:=nil;
       if awal=nil then 
       begin
         awal:=baru;
