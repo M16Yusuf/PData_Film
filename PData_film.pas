@@ -45,8 +45,8 @@ begin
     writeln('Disusun Oleh : ');
     writeln('  - Alif Ramdhan Kusaeri (10118365)');
     writeln('  - Muhammad Yusup       (10118370)');
-    writeln('  - Gifar Fadilah        (10018   )');
-    writeln('  - Muhammad Salman      (10018   )');
+    writeln('  - Gifar Fadilah        (10018378)');
+    writeln('  - Muhammad Salman.A.F  (10018389)');
     writeln('-----------------------------------');
     writeln();
     writeln('1. Tambah Filem');
