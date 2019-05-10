@@ -7,10 +7,10 @@ const
 type 
   PData = ^TData; 
   TData = record
-    Judul : String[15];
-    Sutradara : String[10];
+    judul : String[21];
+    sutradara : String[11];
     genre : string[7];
-    Tahun : integer[4];
+    tahun : integer[4];
     rating : real;
     prev,next:PData;
   end;
@@ -27,6 +27,7 @@ procedure penciptaan(var awal,akhir:PData);
       akhir:=nil;
   end;
 
+<<<<<<< HEAD
 procedure simpanfile();
 var 
   f : file of PData;
@@ -36,10 +37,53 @@ begin
   rewrite(f);
   for i:=1 to banyakdata do 
       write(f,PData);
+=======
+
+// procedure simpanfile(); masih on going di cirian meh teu poho dibenrken 
+// var 
+  // f : file of PData;
+  // i : integer;
+// begin
+  // assign (f,namafile);
+  // rewrite(f);
+  // for i:=1 to banyakdata do 
+      // write(f,PData);
+// end;
+
+
+procedure tampilData(var awal,akhir:Pdata);  // muhammad Yusuf
+var
+  i: integer;
+begin 
+  if (banyakdata>0)then
+    begin
+      clrscr;
+          //   000000000111111111122222222223333333333444444444455555555556666666666
+          //   123456789012345678901234567890123456789012345678901234567890123456789
+      writeln('--------------------------------------------------------------------');
+      writeln('| NO |     Judul Film     | Sutradara | Genre | Tahun | Rating Film |');
+      writeln('--------------------------------------------------------------------');
+      for i:= 1 to banyakdata do
+      begin
+          gotoxy(2, i+3);write(i);
+          gotoxy(7, i+3);write(PData[i].judul);
+          gotoxy(28, i+3);write(PData[i].sutradara);
+          gotoxy(40, i+3);write(PData[i].genre);
+          gotoxy(48, i+3);write(PData[i].tahun);
+          gotoxy(58, i+3);write(Pdata[i].rating);
+      end;
+      writeln();
+      write('Tekan enter untuk melanjutkan.');
+    end
+    else
+      writeln('data tidak ditemukan, atau data kosong ...');
+      readln();
+>>>>>>> 162244dd3bcfc25faaf585b4a3b26a3ecfcf735b
 end;
 
 procedure tambah_filem(var awal,akhir:PData); //Menambahkan Filem // Alif.R.K
 var 
+  i:integer;
   baru:PData;
   begin  
     clrscr;
@@ -47,7 +91,15 @@ var
       begin
         banyakdata:=banyakdata+1;
         writeln('Data filem masuk ke-',banyakdata);
+<<<<<<< HEAD
         write('1. Sisip Depan :');readln()
+=======
+        writeln('Judul filem :');readln(PData[i].judul_filem);
+        writeln('Sutradara   :');readln(PData[i].sutradara);
+        writeln('genre  :');readln(PData[i].genre);
+        writeln('Tahun  :');readln(PData[i].tahun);
+        writeln('rating :');readln(PData[i].rating);
+>>>>>>> 162244dd3bcfc25faaf585b4a3b26a3ecfcf735b
       end
     else
     begin
@@ -100,7 +152,7 @@ end;
 
 begin
     banyakdata:=0;
-    bacaFile();
+    // bacaFile();
     repeat
         clrscr;
         piihan_menu := menu();
@@ -115,5 +167,5 @@ begin
           else writeln('pilihan tidak dikenal');
         end;
     until piihan_menu =0;
-    simpanFile();
+    // simpanFile();
 end.
