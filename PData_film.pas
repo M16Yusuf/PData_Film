@@ -3,7 +3,6 @@ uses crt, sysutils;
 
 const 
   namafile = 'DataFilm.dat';
-
 type 
   PData = ^TData; 
   TData = record
@@ -69,23 +68,28 @@ begin
       readln();
 end;
 
-procedure tambah_filem(var awal,akhir:PData); //Menambahkan Filem // Alif.R.K
+procedure 
+
+procedure tambah_filem; //Menu tambah filem // Alif.R.K
 var 
-  baru:PData;
-  begin  
-    clrscr;
-    if banyakdata<maks then
-      begin
-        banyakdata:=banyakdata+1;
-        writeln('Data filem masuk ke-',banyakdata);
-        write('1. Sisip Depan     :');readln(filem[banyakdata].sisip_depan);
-        write('2. Sisip Tengah    :');readln(filem[banyakdata].sisip_tengah);
-        write('3. Sisip Belakang  :');readln(filem[banyakdata].sisip_belakang);
-      end
-    else
-      begin
-        writeln('pilihan tidak diketehui');
-      end;
+  piltambah:integer;
+  begin
+    repeat
+      clrscr
+        writeln('1.Sisip Depan');
+        writeln('2.Sisip Tengah');
+        writeln('3.Sisip Belakang');
+        writeln('0.Kembali');
+        writeln('--------------------------');
+        write('Mau tambah dimana : ');readln(piltambah);
+        case piltambah of 
+            1 : sisip_depan;
+            2 : sisip_tengah;
+            3 : sisip_belakang;
+            0 : ;
+            else writeln('pilihan tidak dikenal');
+        end;
+        until piltambah=0;
   end;
 
 // Alif.R.K
@@ -118,7 +122,7 @@ begin
         clrscr;
         pilihan_menu := menu();
         case pilihan_menu of 
-          1 : tambah_filem_sisipdepan;
+          1 : tambah_filem;
           2 : edit_filem;
           3 : hapus_filem;
           4 : urut_filem;
