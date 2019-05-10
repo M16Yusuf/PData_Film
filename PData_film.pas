@@ -16,16 +16,16 @@ type
   end;
 
 var
+  filem : array[1..maks] of TData;
   banyakdata : integer;
   piihan_menu : integer;
-  awal,akhir : PData; 
+  awal,akhir : PData;
 
 procedure penciptaan(var awal,akhir:PData);
   begin
       awal:=nil;
       akhir:=nil;
   end;
-
 
 procedure simpanfile();
 var 
@@ -38,7 +38,7 @@ begin
       write(f,PData);
 end;
 
-procedure tambah_filem_sisipdepan(var awal,akhir:PData); //Menambahkan Filem // Alif.R.K
+procedure tambah_filem(var awal,akhir:PData); //Menambahkan Filem // Alif.R.K
 var 
   baru:PData;
   begin  
@@ -47,11 +47,7 @@ var
       begin
         banyakdata:=banyakdata+1;
         writeln('Data filem masuk ke-',banyakdata);
-        writeln('Judul filem :');readln(filem[banyakdata].judul_filem);
-        writeln('Sutradara   :');readln(filem[banyakdata].sutradara);
-        writeln('genre  :');readln(filem[banyakdata].genre);
-        writeln('Tahun  :');readln(filem[banyakdata].tahun);
-        writeln('taring :');readln(filem[banyakdata].rating);
+        write('1. Sisip Depan :');readln()
       end
     else
     begin
@@ -77,49 +73,6 @@ var
         baru^.next:=awal;
         awal^.prev:=baru;
         awal:=baru;
-      end;
-    end;
-  end;
-
-procedure tambah_filem_sisipbelakang(var awal,akhir:PData;data:integer); //Menambahkan Filem // Alif.R.K
-var 
-  baru:PData;
-  begin  
-    clrscr;
-    if banyakdata<maks then
-      begin
-        banyakdata:=banyakdata+1;
-        writeln('Data filem masuk ke-',banyakdata);
-        writeln('Judul filem :');readln(filem[banyakdata].judul_filem);
-        writeln('Sutradara   :');readln(filem[banyakdata].sutradara);
-        writeln('genre  :');readln(filem[banyakdata].genre);
-        writeln('Tahun  :');readln(filem[banyakdata].tahun);
-        writeln('taring :');readln(filem[banyakdata].rating);
-      end
-    else
-    begin
-      writeln('batas data sudah mencapai batas masksimum');
-    end;
-
-    begin
-      new(baru);
-        baru^.Judul:=data;
-         baru^.Sutradara:=data;
-         baru^.genre:data;
-         baru^.Tahun:=data;
-         baru^.rating:=data:
-         baru^.prev:=nil;
-         baru^.next:=nil;
-      if awal=nil then 
-      begin
-        awal:=baru;
-        akhir:=baru;
-      end;
-      else
-      begin
-        baru^.prev:=akhir;
-          akhir^.next:=baru;
-          akhir:=baru;
       end;
     end;
   end;
@@ -152,7 +105,7 @@ begin
         clrscr;
         piihan_menu := menu();
         case piihan_menu of 
-          1 : tambah_filem_sisipdepan;
+          1 : tambah_filem;
           2 : edit_filem;
           3 : hapus_filem;
           4 : urut_filem;
