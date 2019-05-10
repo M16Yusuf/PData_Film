@@ -68,7 +68,15 @@ begin
       readln();
 end;
 
-procedure 
+procedure sisip_depan;//Menu tambah filem sisip depan // Alif.R.K
+var
+  piltambah:integer;
+begin
+  repeat
+    clrscr
+      
+end;
+
 
 procedure tambah_filem; //Menu tambah filem // Alif.R.K
 var 
