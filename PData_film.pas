@@ -78,34 +78,14 @@ var
       begin
         banyakdata:=banyakdata+1;
         writeln('Data filem masuk ke-',banyakdata);
-        write('1. Sisip Depan :');readln()
+        write('1. Sisip Depan     :');readln(filem[banyakdata].sisip_depan);
+        write('2. Sisip Tengah    :');readln(filem[banyakdata].sisip_tengah);
+        write('3. Sisip Belakang  :');readln(filem[banyakdata].sisip_belakang);
       end
     else
-    begin
-      writeln('batas data sudah mencapai batas masksimum');
-    end;
-
-    begin
-      new(baru);
-        baru^.Judul:=data;
-         baru^.Sutradara:=data;
-         baru^.genre:data;
-         baru^.Tahun:=data;
-         baru^.rating:=data:
-         baru^.prev:=nil;
-         baru^.next:=nil;
-      if awal=nil then 
       begin
-        awal:=baru;
-        akhir:=baru;
+        writeln('pilihan tidak diketehui');
       end;
-      else
-      begin
-        baru^.next:=awal;
-        awal^.prev:=baru;
-        awal:=baru;
-      end;
-    end;
   end;
 
 // Alif.R.K
