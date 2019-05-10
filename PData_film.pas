@@ -6,8 +6,8 @@ const
 type 
   PData = ^TData; 
   TData = record
-    Judul : String[15];
-    Sutradara : String[10];
+    judul : String[15];
+    sutradara : String[10];
     genre : string[7];
     tahun : integer;
     rating : real;
@@ -79,13 +79,30 @@ begin
     end;
 end;
 
-procedure sisip_depan;//Menu tambah filem sisip depan // Alif.R.K
+procedure sisip_depan;//Menu --> tambah filem sisip depan // Alif.R.K
 var
   piltambah:integer;
+  baru:=PData;
 begin
-  repeat
-    clrscr
-      
+    new(baru);
+    baru^.judul:=data;
+    baru^.sutradara:=data;
+    baru^.genre:=data;
+    baru^.tahun:=data;
+    baru^.rating:=data;
+    baru^.next:=nil;
+    baru^.prev:=nil;
+    if awal=nil then
+    begin
+      awal:=baru;
+      akhir:=baru;
+    end;
+    else
+    begin
+      baru^.next:=awal;
+      awal^.prev:=baru;
+      awal:=baru;
+    end;
 end;
 
 
