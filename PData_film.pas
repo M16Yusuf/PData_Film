@@ -17,7 +17,7 @@ type
 
 var
   banyakdata : integer;
-  piihan_menu : integer;
+  pilihan_menu : integer;
   awal,akhir : PData; 
 
 procedure penciptaan(var awal,akhir:PData);
@@ -39,7 +39,7 @@ procedure penciptaan(var awal,akhir:PData);
 // end;
 
 
-procedure tampilData(var awal,akhir:Pdata);  // muhammad Yusuf
+procedure tampilDataFilm(var awal,akhir:Pdata);  // muhammad Yusuf
 var
   i: integer;
 begin 
@@ -172,8 +172,10 @@ begin
     writeln('3. Hapus Filem');
     writeln('4. Urutkan Filem');
     writeln('5. Cari Filem');
-    writeln('6. Tampil Filem dari Load');
-    writeln('') 
+    writeln('6. Tampil Data Filem dari Load');
+    writeln('-----------------------------------');
+    write('Pilhan anda :  '); readln(pil); 
+    menu := pil;
 end;
 
 begin
@@ -181,14 +183,14 @@ begin
     // bacaFile();
     repeat
         clrscr;
-        piihan_menu := menu();
-        case piihan_menu of 
+        pilihan_menu := menu();
+        case pilihan_menu of 
           1 : tambah_filem_sisipdepan;
           2 : edit_filem;
           3 : hapus_filem;
           4 : urut_filem;
           5 : cari_filem;
-          6 : tambah_filem;
+          6 : tampilDataFilm;
           0 :;
           else writeln('pilihan tidak dikenal');
         end;
