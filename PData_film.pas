@@ -10,7 +10,7 @@ type
     judul : String[21];
     sutradara : String[11];
     genre : string[7];
-    tahun : integer[4];
+    tahun : integer;
     rating : real;
     prev,next:PData;
   end;
@@ -39,33 +39,44 @@ procedure penciptaan(var awal,akhir:PData);
 // end;
 
 
-procedure tampilDataFilm(var awal,akhir:Pdata);  // muhammad Yusuf
+procedure tampilDataFilm(var awal,akhir:PData);  // muhammad Yusuf// belum selesai 
 var
+  p: PData;
   i: integer;
 begin 
-  if (banyakdata>0)then
+  if awal=nil then
+    begin
+      clrscr;
+      writeln('---------------------------------------------------------------------');
+      writeln('| NO |     Judul Film     | Sutradara | Genre | Tahun | Rating Film |');
+      writeln('---------------------------------------------------------------------');
+      writeln('-------------- Data kosong atau data belum di inputkan --------------');
+      writeln('---------------------------------------------------------------------'); 
+      write('tekan enter untuk melanjutkan ....'); readln();   
+    end
+  else
     begin
       clrscr;
           //   000000000111111111122222222223333333333444444444455555555556666666666
           //   123456789012345678901234567890123456789012345678901234567890123456789
-      writeln('--------------------------------------------------------------------');
+      writeln('---------------------------------------------------------------------');
       writeln('| NO |     Judul Film     | Sutradara | Genre | Tahun | Rating Film |');
-      writeln('--------------------------------------------------------------------');
-      for i:= 1 to banyakdata do
-      begin
+      writeln('---------------------------------------------------------------------');
+      P := awal;
+      while p<>nil do
+        for i:=1 to #awal do
           gotoxy(2, i+3);write(i);
-          gotoxy(7, i+3);write(PData[i].judul);
-          gotoxy(28, i+3);write(PData[i].sutradara);
-          gotoxy(40, i+3);write(PData[i].genre);
-          gotoxy(48, i+3);write(PData[i].tahun);
-          gotoxy(58, i+3);write(Pdata[i].rating);
+          gotoxy(7, i+3);write(P^.judul);
+          gotoxy(28, i+3);write(P^.sutradara);
+          gotoxy(40, i+3);write(P^.genre);
+          gotoxy(48, i+3);write(P^.tahun);
+          gotoxy(58, i+3);write(P^.rating);
+          P:=P^.next;
+        end;
       end;
       writeln();
       write('Tekan enter untuk melanjutkan.');
-    end
-    else
-      writeln('data tidak ditemukan, atau data kosong ...');
-      readln();
+    end;
 end;
 
 procedure tambah_filem_sisipdepan(var awal,akhir:PData); //Menambahkan Filem // Alif.R.K
