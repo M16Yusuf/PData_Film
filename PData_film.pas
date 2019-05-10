@@ -81,7 +81,7 @@ end;
 
 procedure sisip_depan;//Menu --> tambah filem sisip depan // Alif.R.K
 var
-  piltambah:integer;
+  
   baru:=PData;
 begin
     new(baru);
@@ -102,6 +102,31 @@ begin
       baru^.next:=awal;
       awal^.prev:=baru;
       awal:=baru;
+    end;
+end;
+
+procedure sisip_belakang;//Menu --> tambah filem sisip belakang // Alif.R.K
+var
+  baru:=PData;
+begin
+    new(baru);
+    baru^.judul:=data;
+    baru^.sutradara:=data;
+    baru^.genre:=data;
+    baru^.tahun:=data;
+    baru^.rating:=data;
+    baru^.next:=nil;
+    baru^.prev:=nil;
+    if awal=nil then
+    begin
+      awal:=baru;
+      akhir:=baru;
+    end;
+    else
+    begin
+      baru^.next:=akhir;
+      akhir^.prev:=baru;
+      akhir:=baru;
     end;
 end;
 
