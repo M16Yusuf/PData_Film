@@ -3,12 +3,11 @@ uses crt, sysutils;
 
 const 
   namafile = 'DataFilm.dat';
-
 type 
   PData = ^TData; 
   TData = record
-    judul : String[21];
-    sutradara : String[11];
+    Judul : String[15];
+    Sutradara : String[10];
     genre : string[7];
     tahun : integer;
     rating : real;
@@ -16,6 +15,7 @@ type
   end;
 
 var
+  filem : array[1..maks] of TData;
   banyakdata : integer;
   pilihan_menu : integer;
   awal,akhir : PData; 
@@ -79,91 +79,28 @@ begin
     end;
 end;
 
-procedure tambah_filem_sisipdepan(var awal,akhir:PData); //Menambahkan Filem // Alif.R.K
+procedure 
+
+procedure tambah_filem; //Menu tambah filem // Alif.R.K
 var 
-  i:integer;
-  baru:PData;
-  begin  
-    clrscr;
-    if banyakdata<maks then
-      begin
-        banyakdata:=banyakdata+1;
-        writeln('Data filem masuk ke-',banyakdata);
-        writeln('Judul filem :');readln(PData[i].judul_filem);
-        writeln('Sutradara   :');readln(PData[i].sutradara);
-        writeln('genre  :');readln(PData[i].genre);
-        writeln('Tahun  :');readln(PData[i].tahun);
-        writeln('rating :');readln(PData[i].rating);
-      end
-    else
-    begin
-      writeln('batas data sudah mencapai batas masksimum');
-    end;
-
-    begin
-      new(baru);
-        baru^.Judul:=data;
-         baru^.Sutradara:=data;
-         baru^.genre:data;
-         baru^.Tahun:=data;
-         baru^.rating:=data:
-         baru^.prev:=nil;
-         baru^.next:=nil;
-      if awal=nil then 
-      begin
-        awal:=baru;
-        akhir:=baru;
-      end;
-      else
-      begin
-        baru^.next:=awal;
-        awal^.prev:=baru;
-        awal:=baru;
-      end;
-    end;
-  end;
-
-procedure tambah_filem_sisipbelakang(var awal,akhir:PData;data:integer); //Menambahkan Filem // Alif.R.K
-var 
-  baru:PData;
-  begin  
-    clrscr;
-    if banyakdata<maks then
-      begin
-        banyakdata:=banyakdata+1;
-        writeln('Data filem masuk ke-',banyakdata);
-        writeln('Judul filem :');readln(filem[banyakdata].judul_filem);
-        writeln('Sutradara   :');readln(filem[banyakdata].sutradara);
-        writeln('genre  :');readln(filem[banyakdata].genre);
-        writeln('Tahun  :');readln(filem[banyakdata].tahun);
-        writeln('taring :');readln(filem[banyakdata].rating);
-      end
-    else
-    begin
-      writeln('batas data sudah mencapai batas masksimum');
-    end;
-
-    begin
-      new(baru);
-        baru^.Judul:=data;
-         baru^.Sutradara:=data;
-         baru^.genre:data;
-         baru^.Tahun:=data;
-         baru^.rating:=data:
-         baru^.prev:=nil;
-         baru^.next:=nil;
-      if awal=nil then 
-      begin
-        awal:=baru;
-        akhir:=baru;
-      end;
-      else
-      begin
-        baru^.prev:=akhir;
-          akhir^.next:=baru;
-          akhir:=baru;
-      end;
-    end;
+  piltambah:integer;
+  begin
+    repeat
+      clrscr
+        writeln('1.Sisip Depan');
+        writeln('2.Sisip Tengah');
+        writeln('3.Sisip Belakang');
+        writeln('0.Kembali');
+        writeln('--------------------------');
+        write('Mau tambah dimana : ');readln(piltambah);
+        case piltambah of 
+            1 : sisip_depan;
+            2 : sisip_tengah;
+            3 : sisip_belakang;
+            0 : ;
+            else writeln('pilihan tidak dikenal');
+        end;
+        until piltambah=0;
   end;
 
 // Alif.R.K
@@ -191,12 +128,12 @@ end;
 
 begin
     banyakdata:=0;
-    // bacaFile();
+    bacaFile();
     repeat
         clrscr;
         pilihan_menu := menu();
         case pilihan_menu of 
-          1 : tambah_filem_sisipdepan;
+          1 : tambah_filem;
           2 : edit_filem;
           3 : hapus_filem;
           4 : urut_filem;
@@ -206,5 +143,5 @@ begin
           else writeln('pilihan tidak dikenal');
         end;
     until piihan_menu =0;
-    // simpanFile();
+    simpanFile();
 end.
