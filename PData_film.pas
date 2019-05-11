@@ -6,6 +6,7 @@ const
 type 
   PData = ^TData; 
   TData = record
+    info:integer;
     judul : String[15];
     sutradara : String[10];
     genre : string[7];
@@ -85,6 +86,7 @@ var
   baru:=PData;
 begin
     new(baru);
+    baru^.info:=data;
     baru^.judul:=data;
     baru^.sutradara:=data;
     baru^.genre:=data;
@@ -110,6 +112,7 @@ var
   baru:=PData;
 begin
     new(baru);
+    baru^.info:=data;
     baru^.judul:=data;
     baru^.sutradara:=data;
     baru^.genre:=data;
@@ -150,9 +153,19 @@ begin
                 sisip_depan(awal,akhir,data)
                 else
                 begin
-                
+                  new(baru);
+                  baru^.info:=data;
+                  baru^.next:=nil;
+                  baru^.prev:=nil;
+
+                  baru^.next:=bantu;
+                  baru^.prev:=bantu^.prev;
+                  bantu^.prev:=baru;
+                  baru^.prev^.next:=baru;
                 end;
           end;
+          else
+            writeln('Posisi sisip tidak ditemukan. Penyisipan dibatalkan');
       end;
 end;
 
