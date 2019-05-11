@@ -7,18 +7,18 @@ type
   PData = ^TData; 
   TData = record
     info:integer;
-    judul : String[15];
-    sutradara : String[10];
-    genre : string[7];
-    tahun : integer;
-    rating : real;
+    judul:String[15];
+    sutradara:String[10];
+    genre:string[7];
+    tahun:integer;
+    rating:real;
     prev,next:PData;
   end;
 
 var
-  banyakdata : integer;
-  pilihan_menu : integer;
-  awal,akhir : PData; 
+  banyakdata:integer;
+  pilihan_menu:integer;
+  awal,akhir:PData; 
 
 procedure penciptaan(var awal,akhir:PData);
   begin
