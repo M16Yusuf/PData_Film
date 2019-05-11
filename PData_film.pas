@@ -79,7 +79,7 @@ begin
     end;
 end;
 
-procedure sisip_depan;//Menu --> tambah filem sisip depan // Alif.R.K
+procedure sisip_depan(var awal,akhir:PData;data:integer);//Menu --> tambah filem sisip depan // Alif.R.K
 var
   
   baru:=PData;
@@ -105,7 +105,7 @@ begin
     end;
 end;
 
-procedure sisip_belakang;//Menu --> tambah filem sisip belakang // Alif.R.K
+procedure sisip_belakang(var awal,akhir:PData;data:integer)v;//Menu --> tambah filem sisip belakang // Alif.R.K
 var
   baru:=PData;
 begin
@@ -130,6 +130,31 @@ begin
     end;
 end;
 
+procedure sisip_tengah(var awal,akhir:PData;data:integer);
+var 
+  posisisisip:integer;
+  bantu,baru:PData;
+begin
+    if awal=nil then 
+      sisipdepan(awal,akhir,data)
+      else
+      begin
+          write('Posisi Sisip : ');readln(posisisisip);
+          bantu:=awal;
+          while(bantu^.info<>posisisisip)and
+               (bantu<>akhir) do
+               bantu:=bantu^.next;
+          if bantu^.info=posisisisip then //jika ditemukan
+          begin
+                if bantu=awal then
+                sisip_depan(awal,akhir,data)
+                else
+                begin
+                
+                end;
+          end;
+      end;
+end;
 
 procedure tambah_filem; //Menu tambah filem // Alif.R.K
 var 
