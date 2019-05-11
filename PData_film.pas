@@ -16,7 +16,6 @@ type
   end;
 
 var
-  filem : array[1..maks] of TData;
   banyakdata : integer;
   pilihan_menu : integer;
   awal,akhir : PData; 
