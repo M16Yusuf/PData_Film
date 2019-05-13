@@ -42,7 +42,7 @@ procedure penciptaan(var awal,akhir:PData);
 // end;
 
 
-procedure tampilDataFilm(var awal,akhir:PData);  // muhammad Yusuf// belum selesai 
+procedure tampilDataFilm(var awal:PData);  // muhammad Yusuf// belum selesai 
 var
   tamp : PData;
   banyakdata: integer;
@@ -86,48 +86,216 @@ begin
       write('tekan enter untuk melanjutkan . . .'); readln();
   end;
 
-  
-
-procedure sisip_depan();
-begin 
-end;
-
-procedure sisip_tengah();
+procedure sisipdepan (var awal, akhir : Pdata; data : Tinfo);
+var
+	baru : Pdata;
 begin
-end;
+	new(baru);
+	baru^.info.judul := data.judul;
+	baru^.info.sutradara := data.sutradara;
+	baru^.info.genre := data.genre;
+	baru^.info.tahun := data.tahun;
+  baru^.info.Rating := data.rating;
+	if awal = nil then
+	begin
+		awal := baru;
+		akhir := baru;
+	end
+	else
+		begin
+			baru^.next := awal;
+			baru^.prev := akhir;
+			akhir^.next := baru;
+			awal^.prev := baru;
+			awal := baru;
+		end;
+end;	
 
-procedure sisip_belakang();
+procedure sisipbelakang (var awal, akhir : Pdata; data : Tinfo);
+var
+	baru : Pdata;
 begin
+	new(baru);
+	baru^.info.judul := data.judul;
+	baru^.info.sutradara := data.sutradara;
+	baru^.info.genre := data.genre;
+	baru^.info.tahun := data.tahun;
+  baru^.info.rating := data.rating;
+	if awal = nil then
+	begin
+		awal := baru;
+		akhir := baru;
+	end
+	else
+		begin
+			akhir^.next := baru;
+            baru^.prev := akhir;
+            baru^.next := awal;
+            awal^.prev := baru;
+            akhir := baru;
+		end;
 end;
 
-procedure tambah_filem; //Menu tambah filem // Alif.R.K
-var 
-  piltambah:integer;
-  begin
-    repeat
-      clrscr;
-        writeln('1.Sisip Depan');
-        writeln('2.Sisip Tengah');
-        writeln('3.Sisip Belakang');
-        writeln('0.Kembali');
-        writeln('--------------------------');
-        write('Mau tambah dimana : ');readln(piltambah);
-        case piltambah of 
-            1 : sisip_depan;
-            2 : sisip_tengah;
-            3 : sisip_belakang;
-            0 : ;
-            else writeln('pilihan tidak dikenal');
-        end;
-    until piltambah=0;
-  end;
+procedure tambahdata (var awal, akhir : PData; data : Tinfo);
+var
+   bantu:PData;
+begin
+     new(bantu);
+     bantu^.info.judul := data.judul;
+     bantu^.info.sutradara := data.sutradara;
+     bantu^.info.genre := data.genre;
+     bantu^.info.tahun := data.tahun;
+     bantu^.info.rating := data.rating;
+     bantu^.prev:=nil;
+     bantu^.next:=nil;
+     if awal=nil then
+     begin
+          awal:=bantu;
+          akhir:=bantu;
+          awal^.prev:=akhir;
+          akhir^.next:=awal;
+     end
+     else
+     begin
+          bantu^.next:=awal;
+          bantu^.prev:=akhir;
+          akhir^.next:=bantu;
+          awal^.prev:=bantu;
+          akhir:=bantu;
+     end;
+end;
+
+procedure menutambahdatabelakang(data:Tinfo);
+begin
+	clrscr;
+	writeln('Masukan Data');
+	writeln('------------------');
+	write('Judul 		  : ');readln(data.judul);
+	write('Sutradara 	: ');readln(data.Sutradara);
+	write('Genre 		  : ');readln(data.genre);
+	write('Tahun 		  : ');readln(data.tahun);
+  write('rating     : ');readln(data.rating);
+	sisipbelakang(awal, akhir, data);
+end;
+
+procedure menutambahfilm(data:Tinfo);
+var
+	x, y, u : integer;
+begin
+	x := 5;
+	y := 1;
+	u := 18;
+	clrscr;
+	gotoxy(x,y+1);writeln('   Masukan Data   ');
+	gotoxy(x,y+2);writeln('------------------');
+	gotoxy(x,y+3);write('Judul      : ');
+	gotoxy(x,y+4);write('Sutradara  : ');
+	gotoxy(x,y+5);write('Genre      : ');
+	gotoxy(x,y+6);write('Tahun      : ');
+  gotoxy(x,y+7);write('rating     : ');
+	gotoxy(u,y+3);readln(data.judul);
+	gotoxy(u,y+4);readln(data.Sutradara);
+	gotoxy(u,y+5);readln(data.genre);
+	gotoxy(u,y+6);readln(data.tahun);
+  gotoxy(u,y+7);readln(data.rating);
+	tambahdata(awal, akhir, data);
+	gotoxy(x,y+8);writeln('Data Berhasil di Tambahkan, Tekan enter untuk kembali ke menu.');readln;
+	clrscr;
+end;
+
+procedure hapusdepan(var awal,akhir:PData);//salman
+var
+   phapus:PData;
+begin
+     phapus:=awal;
+     if awal=akhir then
+        begin
+             awal := nil;
+             akhir := nil;
+        end
+     else
+         begin
+              awal:=awal^.next;
+              awal^.prev:=akhir;
+              akhir^.next:=awal;
+         end;
+     dispose(phapus);
+     clrscr;
+end;
+procedure hapusakhir(var awal,akhir:PData);
+var
+   phapus:PData;
+begin
+     phapus:=akhir;
+     awal^.prev:=akhir;
+     akhir^.next:=awal;
+     dispose(phapus);
+     clrscr;
+end;
+procedure hapustengah(var awal,akhir:PData);//salman 
+var
+   phapus:PData;
+   posisihapus:string;
+   x,y,u:integer;
+begin
+     if awal=nil then
+        writeln('Data Kosong')
+     else
+     begin
+          write('Tulis Judul Film yang akan dihapus : ');readln(posisihapus);
+          phapus:=awal;
+          while (phapus^.info.Judul<>posisihapus) and (phapus<>akhir) do
+          phapus:=phapus^.next;;
+          if phapus^.info.Judul=posisihapus then
+          begin
+               if phapus = awal then
+                  hapusdepan( awal, akhir)
+               else
+               if phapus = akhir then
+                  hapusakhir(awal, akhir)
+               else
+               begin
+                    phapus^.prev^.next:=phapus^.next;
+                    phapus^.next^.prev:=phapus^.prev;
+                    dispose(phapus);
+               end;
+          end
+          else
+          begin
+               writeln('Data tidak ditemukan');
+               readln;
+          end;
+          clrscr;
+end;
+
+procedure menuhapusfilm; //Salman
+var
+pilih:char;
+x,y,u:integer;
+begin
+     x:=5;
+     y:=1;
+     gotoxy(x,y+2);writeln('  Menu Hapus  ');
+     gotoxy(x,y+2);writeln('--------------');
+     gotoxy(x,y+2);writeln('1. Hapus Depan');
+     gotoxy(x,y+2);writeln('2. Hapus Belakang');
+     gotoxy(x,y+2);writeln('3. Hapus Tengah');
+     case pilih of
+     '1':begin
+              hapusdepan(awal,akhir);
+         end;
+     '2':begin
+              hapusbelakang(awal;akhir);
+         end;
+     '3':begin
+              hapustengah(awal,akhir);
+          end;
+     end;
+end;
 
 
 
-
-
-// Alif.R.K
-function menu :integer;
+function menu :integer;// Alif.R.K
   var pil:integer;
 begin
     writeln('Aplikasi Data filem');
@@ -151,20 +319,20 @@ end;
 
 begin
     banyakdata:=0;
-    bacaFile();
+  //  bacaFile();
     repeat
         clrscr;
         pilihan_menu := menu();
         case pilihan_menu of 
-          1 : tambah_filem;
+          1 : menutambahfilm(Tinfo);
           2 : edit_filem;
-          3 : hapus_filem;
+          3 : menuhapusfilm;
           4 : urut_filem;
           5 : cari_filem;
-          6 : tampilDataFilm;
+          6 : tampilDataFilm(awal);
           0 :;
           else writeln('pilihan tidak dikenal');
         end;
     until piihan_menu =0;
-    simpanFile();
+   // simpanFile();
 end.
