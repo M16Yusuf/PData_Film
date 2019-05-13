@@ -4,20 +4,24 @@ uses crt, sysutils;
 const 
   namafile = 'DataFilm.dat';
 type 
-  PData = ^TData; 
-  TData = record
+  Tinfo = record
     Judul : String[24];
     Sutradara : String[10];
     genre : string[7];
     tahun : integer;
     rating : real;
+  end;
+
+  PData = ^TData; 
+  TData = record
+    info : Tinfo; 
     prev,next:PData;
   end;
 
 var
   banyakdata : integer;
   pilihan_menu : integer;
-  awal,akhir : PData; 
+  awal,akhir : PData;
 
 procedure penciptaan(var awal,akhir:PData);
   begin
@@ -43,27 +47,7 @@ var
   tamp : PData;
   banyakdata: integer;
 begin 
-      clrscr;
-          //   000000000111111111122222222223333333333444444444455555555556666666666
-          //   123456789012345678901234567890123456789012345678901234567890123456789
-      writeln('---------------------------------------------------------------------');
-      writeln('|      Judul Film       |  Sutradara  | Genre | Tahun | Rating Film |');
-      writeln('---------------------------------------------------------------------');
-  if awal<> nil then
-    begin    
-      tamp := akhir;
-      tamp := tamp^.next;
-      banyakdata:=4;
-      while tamp <> nil do
-        gotoxy(2, banyakdata);write(tamp^.judul);
-        gotoxy(26, banyakdata);write(tamp^.sutradara);
-        gotoxy(40, banyakdata);write(tamp^.genre);
-        gotoxy(48, banyakdata);write(tamp^.tahun);
-        gotoxy(56, banyakdata);write(tamp^.rating); 
-        banyakdata:=banyakdata + 1;
-      end;       
-    end
-  else
+  if awal = nil then
     begin
       clrscr;
       writeln('---------------------------------------------------------------------');
@@ -71,9 +55,49 @@ begin
       writeln('---------------------------------------------------------------------');
       writeln('-------------- Data kosong atau data belum di inputkan --------------');
       writeln('---------------------------------------------------------------------');   
-      readln();
-    end;    
-   write('tekan enter untuk melanjutkan . . .'); readln();
+      write('tekan enter untuk melanjutkan . . .'); readln();
+    end    
+  else
+  if awal<> nil then
+    begin    
+      clrscr;
+          //   000000000111111111122222222223333333333444444444455555555556666666666
+          //   123456789012345678901234567890123456789012345678901234567890123456789
+      writeln('---------------------------------------------------------------------');
+      writeln('|      Judul Film       |  Sutradara  | Genre | Tahun | Rating Film |');
+      writeln('---------------------------------------------------------------------');
+      tamp := akhir;
+      tamp := tamp^.next;
+      banyakdata:=4;
+      while tamp <> nil do
+        gotoxy(1, banyakdata);write('|');
+        gotoxy(2, banyakdata);write(tamp^.info.judul);
+        gotoxy(25, banyakdata);write('|');
+        gotoxy(26, banyakdata);write(tamp^.info.sutradara);
+        gotoxy(39, banyakdata);write('|');
+        gotoxy(40, banyakdata);write(tamp^.info.genre);
+        gotoxy(47, banyakdata);write('|');
+        gotoxy(48, banyakdata);write(tamp^.info.tahun);
+        gotoxy(55, banyakdata);write('|');
+        gotoxy(56, banyakdata);write(tamp^.info. rating); 
+        gotoxy(69, banyakdata);write('|');
+        banyakdata:=banyakdata + 1;
+      end;       
+      write('tekan enter untuk melanjutkan . . .'); readln();
+  end;
+
+  
+
+procedure sisip_depan();
+begin 
+end;
+
+procedure sisip_tengah();
+begin
+end;
+
+procedure sisip_belakang();
+begin
 end;
 
 procedure tambah_filem; //Menu tambah filem // Alif.R.K
@@ -81,7 +105,7 @@ var
   piltambah:integer;
   begin
     repeat
-      clrscr
+      clrscr;
         writeln('1.Sisip Depan');
         writeln('2.Sisip Tengah');
         writeln('3.Sisip Belakang');
@@ -97,6 +121,10 @@ var
         end;
     until piltambah=0;
   end;
+
+
+
+
 
 // Alif.R.K
 function menu :integer;
