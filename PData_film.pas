@@ -6,19 +6,18 @@ const
 type 
   PData = ^TData; 
   TData = record
-    info:integer;
-    judul:String[15];
-    sutradara:String[10];
-    genre:string[7];
-    tahun:integer;
-    rating:real;
+    Judul : String[24];
+    Sutradara : String[10];
+    genre : string[7];
+    tahun : integer;
+    rating : real;
     prev,next:PData;
   end;
 
 var
-  banyakdata:integer;
-  pilihan_menu:integer;
-  awal,akhir:PData; 
+  banyakdata : integer;
+  pilihan_menu : integer;
+  awal,akhir : PData; 
 
 procedure penciptaan(var awal,akhir:PData);
   begin
@@ -41,131 +40,40 @@ procedure penciptaan(var awal,akhir:PData);
 
 procedure tampilDataFilm(var awal,akhir:PData);  // muhammad Yusuf// belum selesai 
 var
-  p: PData;
-  i: integer;
+  tamp : PData;
+  banyakdata: integer;
 begin 
-  if awal=nil then
-    begin
-      clrscr;
-      writeln('---------------------------------------------------------------------');
-      writeln('| NO |     Judul Film     | Sutradara | Genre | Tahun | Rating Film |');
-      writeln('---------------------------------------------------------------------');
-      writeln('-------------- Data kosong atau data belum di inputkan --------------');
-      writeln('---------------------------------------------------------------------'); 
-      write('tekan enter untuk melanjutkan ....'); readln();   
-    end
-  else
-    begin
       clrscr;
           //   000000000111111111122222222223333333333444444444455555555556666666666
           //   123456789012345678901234567890123456789012345678901234567890123456789
       writeln('---------------------------------------------------------------------');
-      writeln('| NO |     Judul Film     | Sutradara | Genre | Tahun | Rating Film |');
+      writeln('|      Judul Film       |  Sutradara  | Genre | Tahun | Rating Film |');
       writeln('---------------------------------------------------------------------');
-      P := awal;
-      while p<>nil do
-        for i:=1 to #awal do
-          gotoxy(2, i+3);write(i);
-          gotoxy(7, i+3);write(P^.judul);
-          gotoxy(28, i+3);write(P^.sutradara);
-          gotoxy(40, i+3);write(P^.genre);
-          gotoxy(48, i+3);write(P^.tahun);
-          gotoxy(58, i+3);write(P^.rating);
-          P:=P^.next;
-        end;
-      end;
-      writeln();
-      write('Tekan enter untuk melanjutkan.');
-    end;
-end;
-
-procedure sisip_depan(var awal,akhir:PData;data:integer);//Menu --> tambah filem sisip depan // Alif.R.K
-var
-  
-  baru:=PData;
-begin
-    new(baru);
-    baru^.info:=data;
-    baru^.judul:=data;
-    baru^.sutradara:=data;
-    baru^.genre:=data;
-    baru^.tahun:=data;
-    baru^.rating:=data;
-    baru^.next:=nil;
-    baru^.prev:=nil;
-    if awal=nil then
+  if awal<> nil then
+    begin    
+      tamp := akhir;
+      tamp := tamp^.next;
+      banyakdata:=4;
+      while tamp <> nil do
+        gotoxy(2, banyakdata);write(tamp^.judul);
+        gotoxy(26, banyakdata);write(tamp^.sutradara);
+        gotoxy(40, banyakdata);write(tamp^.genre);
+        gotoxy(48, banyakdata);write(tamp^.tahun);
+        gotoxy(56, banyakdata);write(tamp^.rating); 
+        banyakdata:=banyakdata + 1;
+      end;       
+    end
+  else
     begin
-      awal:=baru;
-      akhir:=baru;
-    end;
-    else
-    begin
-      baru^.next:=awal;
-      awal^.prev:=baru;
-      awal:=baru;
-    end;
-end;
-
-procedure sisip_belakang(var awal,akhir:PData;data:integer)v;//Menu --> tambah filem sisip belakang // Alif.R.K
-var
-  baru:=PData;
-begin
-    new(baru);
-    baru^.info:=data;
-    baru^.judul:=data;
-    baru^.sutradara:=data;
-    baru^.genre:=data;
-    baru^.tahun:=data;
-    baru^.rating:=data;
-    baru^.next:=nil;
-    baru^.prev:=nil;
-    if awal=nil then
-    begin
-      awal:=baru;
-      akhir:=baru;
-    end;
-    else
-    begin
-      baru^.next:=akhir;
-      akhir^.prev:=baru;
-      akhir:=baru;
-    end;
-end;
-
-procedure sisip_tengah(var awal,akhir:PData;data:integer);
-var 
-  posisisisip:integer;
-  bantu,baru:PData;
-begin
-    if awal=nil then 
-      sisipdepan(awal,akhir,data)
-      else
-      begin
-          write('Posisi Sisip : ');readln(posisisisip);
-          bantu:=awal;
-          while(bantu^.info<>posisisisip)and
-               (bantu<>akhir) do
-               bantu:=bantu^.next;
-          if bantu^.info=posisisisip then //jika ditemukan
-          begin
-                if bantu=awal then
-                sisip_depan(awal,akhir,data)
-                else
-                begin
-                  new(baru);
-                  baru^.info:=data;
-                  baru^.next:=nil;
-                  baru^.prev:=nil;
-
-                  baru^.next:=bantu;
-                  baru^.prev:=bantu^.prev;
-                  bantu^.prev:=baru;
-                  baru^.prev^.next:=baru;
-                end;
-          end;
-          else
-            writeln('Posisi sisip tidak ditemukan. Penyisipan dibatalkan');
-      end;
+      clrscr;
+      writeln('---------------------------------------------------------------------');
+      writeln('|      Judul Film       |  Sutradara  | Genre | Tahun | Rating Film |');
+      writeln('---------------------------------------------------------------------');
+      writeln('-------------- Data kosong atau data belum di inputkan --------------');
+      writeln('---------------------------------------------------------------------');   
+      readln();
+    end;    
+   write('tekan enter untuk melanjutkan . . .'); readln();
 end;
 
 procedure tambah_filem; //Menu tambah filem // Alif.R.K
@@ -187,7 +95,7 @@ var
             0 : ;
             else writeln('pilihan tidak dikenal');
         end;
-        until piltambah=0;
+    until piltambah=0;
   end;
 
 // Alif.R.K
